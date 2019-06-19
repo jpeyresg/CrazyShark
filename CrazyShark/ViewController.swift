@@ -72,6 +72,7 @@ class ViewController: UIViewController, ARSKViewDelegate, SharkGameProtocol {
         case "shark":
             let sprite = SKSpriteNode(imageNamed: "sharkFirst")
             sprite.name = "shark"
+            
             return sprite
         case "firstFish":
             let sprite = SKSpriteNode(imageNamed: "firstFish")

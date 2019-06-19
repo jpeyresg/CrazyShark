@@ -13,7 +13,9 @@ import GameplayKit
 class Scene: SKScene {
     
     var sharkGame: SharkGameProtocol?
-
+    var sharkSprite : SKNode?
+    var targetCreated = false
+    var fishTarget : SKNode?
     var sharkScoreText = 0 {
         didSet{
             self.sharkGame?.sharkScoreDidChange(score: self.sharkScoreText)
@@ -42,7 +44,11 @@ class Scene: SKScene {
         playerScoreText = 0
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
             self.createSprite()
+            guard let shark = self.childNode(withName: "shark") else{return}
+            self.sharkSprite = shark
+            self.moveShark(node: self.sharkSprite!, destiny: (x: CGFloat(2), y: CGFloat(0), z: CGFloat(0)))
         })
+        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -63,7 +69,7 @@ class Scene: SKScene {
             
             switch spriteName {
             case "shark":
-                return
+                moveShark(node: sprite, destiny: (x: CGFloat(2), y: CGFloat(2), z: CGFloat(0)))
             case "firstFish":
                 playerScoreText += 10
                 killFish(sprite: sprite)
@@ -135,6 +141,18 @@ class Scene: SKScene {
             sceneView.session.add(anchor: anchor)
         }
         spritesCreated += 1
+    }
+    
+    func moveShark(node: SKNode, target: SKNode){
+        
+    }
+    
+    func moveShark(node: SKNode, destiny: (x: CGFloat, y: CGFloat, z: CGFloat)){
+        let movement = SCNAction.moveBy(x: destiny.x, y: destiny.y, z: destiny.z, duration: TimeInterval(CGFloat(destiny.x)))
+    }
+    
+    func createTarget(sharkNode:SKNode) -> SKNode{
+        return sharkNode
     }
     
 }
