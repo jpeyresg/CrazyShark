@@ -1,27 +1,29 @@
 //
-//  Scene.swift
+//  File2.swift
 //  CrazyShark
 //
-//  Created by Juan Garrido Peyres on 10/06/2019.
+//  Created by Juan Garrido Peyres on 22/06/2019.
 //  Copyright © 2019 Juan Garrido Peyres. All rights reserved.
 //
 
+import Foundation
 import SpriteKit
 import ARKit
 import GameplayKit
 
-class Scene: SKScene {
+class File2: SKScene {
     
     var sharkGame: SharkGameProtocol?
     var sharkSprite : SKNode?
     var targetCreated = false
     var fishTarget : SKNode?
+    var fishes = [SCNNode]()
     var sharkScoreText = 0 {
         didSet{
             self.sharkGame?.sharkScoreDidChange(score: self.sharkScoreText)
         }
     }
-
+    
     var playerScoreText = 0 {
         didSet{
             self.sharkGame?.playerScoreDidChange(score: self.playerScoreText)
@@ -33,8 +35,8 @@ class Scene: SKScene {
     }
     var spritesCreated = 0
     
-//    let startTime = Date()
-//    let deathSound = SKAction.playSoundFileNamed("QuickDeath", waitForCompletion: false)
+    //    let startTime = Date()
+    //    let deathSound = SKAction.playSoundFileNamed("QuickDeath", waitForCompletion: false)
     
     override func didMove(to view: SKView) {
         // Setup your scene here
@@ -44,9 +46,7 @@ class Scene: SKScene {
         playerScoreText = 0
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
             self.createSprite()
-            guard let shark = self.childNode(withName: "shark") else{return}
-            self.sharkSprite = shark
-            self.moveShark(node: self.sharkSprite!, destiny: (x: CGFloat(2), y: CGFloat(0), z: CGFloat(0)))
+            
         })
         
     }
@@ -96,51 +96,58 @@ class Scene: SKScene {
         sprite.run(sequenceAction)
     }
     
-    func createSprite(){
+    func createSprite(fishType: fishType){
         
         if spritesCreated == 46 {
             timer?.invalidate()
             timer = nil
             return
         }
-        
-        
+        var fish : SCNNode?
         // Switch que definirá el aranchor.name o nombre del ancla que vendrá de un struct
-        guard let sceneView = self.view as? ARSKView else {return}
+        guard let sceneView = self.view as? ARSCNView else {return}
         
         // 1. Crear un generador de números aleatorios
         let random = GKRandomSource.sharedRandom()
         //2. Crear una matriz de rotación aleatoria en X
-        let rotateX = simd_float4x4(SCNMatrix4MakeRotation(2.0 * Float.pi * random.nextUniform(), 1, 0, 0))
+        let rotateX = SCNMatrix4MakeRotation(2.0 * Float.pi * random.nextUniform(), 1, 0, 0)
         //3. Crear una matriz de ratación aleatoria en Y
-        let rotateY = simd_float4x4(SCNMatrix4MakeRotation(2.0 * Float.pi * random.nextUniform(), 0, 1, 0))
+        let rotateY = SCNMatrix4MakeRotation(2.0 * Float.pi * random.nextUniform(), 0, 1, 0)
         //4. Combinar las dos roataciones con un producto de matrices
-        let rotation = simd_mul(rotateX, rotateY)
+        let rotation = SCNMatrix4Mult(rotateX, rotateY)
         //5. Crear una translación de 1.5 metros en la dirección de la pantalla
-        var translation = matrix_identity_float4x4
-        translation.columns.3.z = -2
+        var translation = SCNMatrix4Identity
+        translation.m43 = -2
         //6. Combinar la rotación del paso 4 con la translación del paso 5
-        let finalTransform = simd_mul(rotation, translation)
+        let finalTransform = SCNMatrix4Mult(rotation, translation)
         //7. Crear un punto de ancla en el punto final determinado en el paso 6
-//        let anchor = ARAnchor(transform: finalTransform)
-        switch spritesCreated {
-        case 0:
-            let anchor = ARAnchor(name: "shark", transform: finalTransform)
-            sceneView.session.add(anchor: anchor)
-        case 1...31:
-            let anchor = ARAnchor(name: "firstFish", transform: finalTransform)
-            sceneView.session.add(anchor: anchor)
-        case 31...41:
-            let anchor = ARAnchor(name: "secondFish", transform: finalTransform)
-            sceneView.session.add(anchor: anchor)
-        case 41...46:
-            let anchor = ARAnchor(name: "thirdFish", transform: finalTransform)
-            sceneView.session.add(anchor: anchor)
-        default:
-            let anchor = ARAnchor(name: "firstFish", transform: finalTransform)
-            sceneView.session.add(anchor: anchor)
+        //        let anchor = ARAnchor(transform: finalTransform)
+        switch fishType {
+        case .shark:
+            fish = createAnyFish(image: UIImage(named: "sharkFirst")!, fishName: "shark")
+            
+        case .firstFish:
+            fish = createAnyFish(image: UIImage(named: "firstFish")!, fishName: "firstFish")
+            
+        case .secondFish:
+            fish = createAnyFish(image: UIImage(named: "secondFish")!, fishName: "secondFish")
+            
+        case .thirdFish:
+            fish = createAnyFish(image: UIImage(named: "thirdFish")!, fishName: "thirdFish")
+            
         }
+        fish!.transform = finalTransform
+        sceneView.scene.rootNode.addChildNode(fish!)
         spritesCreated += 1
+    }
+    
+    func createAnyFish(image: UIImage, fishName: String) -> SCNNode {
+        let plane = SCNPlane(width: 0.1, height: 0.1)
+        plane.firstMaterial?.diffuse.contents = image
+        let node = SCNNode(geometry: plane)
+        node.constraints = [SCNBillboardConstraint()]
+        node.name = fishName
+        return node
     }
     
     func moveShark(node: SKNode, target: SKNode){
@@ -148,7 +155,9 @@ class Scene: SKScene {
     }
     
     func moveShark(node: SKNode, destiny: (x: CGFloat, y: CGFloat, z: CGFloat)){
-        let movement = SCNAction.moveBy(x: destiny.x, y: destiny.y, z: destiny.z, duration: TimeInterval(CGFloat(destiny.x)))
+        let movement = SKAction.move(by: CGVector(dx: destiny.x, dy: destiny.y), duration: 2)
+        node.run(movement)
+        
     }
     
     func createTarget(sharkNode:SKNode) -> SKNode{
