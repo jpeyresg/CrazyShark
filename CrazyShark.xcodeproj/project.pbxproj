@@ -12,10 +12,8 @@
 		70AED96622AEB20B0031A006 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96422AEB20B0031A006 /* Main.storyboard */; };
 		70AED96822AEB20C0031A006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96722AEB20C0031A006 /* Assets.xcassets */; };
 		70AED96B22AEB20C0031A006 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96922AEB20C0031A006 /* LaunchScreen.storyboard */; };
-		70AF0E0E22B5430700C7DAFA /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF0E0D22B5430700C7DAFA /* File.swift */; };
 		70AF0E1122B54B3900C7DAFA /* SharkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */; };
 		70AF0E1222B54B3900C7DAFA /* SharkMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */; };
-		70FCF7E322BE625500117603 /* File2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FCF7E222BE625500117603 /* File2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +24,8 @@
 		70AED96722AEB20C0031A006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70AED96A22AEB20C0031A006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70AED96C22AEB20C0031A006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70AF0E0D22B5430700C7DAFA /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharkMenu.swift; sourceTree = "<group>"; };
 		70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharkMenu.xib; sourceTree = "<group>"; };
-		70FCF7E222BE625500117603 /* File2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +64,8 @@
 				70AED96722AEB20C0031A006 /* Assets.xcassets */,
 				70AED96922AEB20C0031A006 /* LaunchScreen.storyboard */,
 				70AED96C22AEB20C0031A006 /* Info.plist */,
-				70AF0E0D22B5430700C7DAFA /* File.swift */,
 				70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */,
 				70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */,
-				70FCF7E222BE625500117603 /* File2.swift */,
 			);
 			path = CrazyShark;
 			sourceTree = "<group>";
@@ -149,9 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70AED96322AEB20B0031A006 /* ViewController.swift in Sources */,
-				70AF0E0E22B5430700C7DAFA /* File.swift in Sources */,
 				70AED95D22AEB20B0031A006 /* AppDelegate.swift in Sources */,
-				70FCF7E322BE625500117603 /* File2.swift in Sources */,
 				70AF0E1122B54B3900C7DAFA /* SharkMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
