@@ -11,17 +11,24 @@ import SceneKit
 import ARKit
 import GameplayKit
 
-class ViewController: UIViewController, ARSCNViewDelegate{
+class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
     var fishTimer : Timer?
     var gameTimer : Timer?
     var sharkTimer : Timer?
     var fishesArray = [SCNNode]()
-    var sharkCreated = false
     var shark : SCNNode?
     @IBOutlet var sharkScoreText: UILabel!
     @IBOutlet var playerScoreText: UILabel!
+    var sharkCreated = false
+    var sharkTarget : SCNNode? {
+        didSet{
+            if self.sharkTarget == nil {
+                self.createTarget()
+            }
+        }
+    }
     var sharkScore = 0 {
         didSet{
             self.sharkScoreText.text = "\(self.sharkScore)"
@@ -39,6 +46,9 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         
         // Set the view's delegate
         sceneView.delegate = self
+        
+        // hacemos que el delegado de physicWorld sea la propia view
+        sceneView.scene.physicsWorld.contactDelegate = self
 
         // Show statistics such as fps and node count
         sceneView.showsStatistics = false
@@ -64,10 +74,13 @@ class ViewController: UIViewController, ARSCNViewDelegate{
 //            }
             if self.fishesArray.count > 1 && self.sharkCreated == false {
                 self.shark = self.createShark()
+                self.createTarget()
             }
             if self.fishesArray.count < 30 {
                 self.createFish()
             }
+            
+            self.createTarget()
             
         })
         
@@ -88,15 +101,6 @@ class ViewController: UIViewController, ARSCNViewDelegate{
     
     // MARK: - ARSCNViewDelegate
     
-    /*
-     // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-     let node = SCNNode()
-     
-     return node
-     }
-     */
-    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -112,36 +116,41 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //localizar el primer toque del conjunto de toques
-        //mirar si el toque cae dentro de nuestra vista
-        guard let sceneView = self.view as? ARSCNView else { return }
-        guard let touch = touches.first else {return}
-        let location = touch.location(in: sceneView)
-
-        //buscaremos todos los nodos que han sido tocados por ese toque de usuario
-        let hit = sceneView.hitTest(location, options: nil)
-
-        //cogeremos el primer sprite del array que nos devuelve el método anterior (si lo hay) y haremos las acciones pertinentes según el nombre del nodo
-        guard let sprite = hit.first?.node else {return}
-        let spriteName = sprite.name
-        switch spriteName {
-        case "shark":
-            return
-        case "firstFish":
-            playerScore += 10
-            killFish(fish: sprite)
-        case "secondFish":
-            playerScore += 20
-            killFish(fish: sprite)
-        case "thirdFish":
-            playerScore += 30
-            killFish(fish: sprite)
-        default:
-            return
+    // MARK: - SCNPhysicsContactDelegate
+    
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        var sharkInContact : SCNNode?
+        var fishInContact : SCNNode?
+        print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
+        if (contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue)  ||  (contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue) {
+            if contact.nodeA.name! == "shark" || contact.nodeB.name! == "shark" {
+                if contact.nodeA.name! == "shark" {
+                    sharkInContact = contact.nodeA
+                    fishInContact = contact.nodeB
+                } else {
+                    sharkInContact = contact.nodeB
+                    fishInContact = contact.nodeA
+                }
+                let fishName = fishInContact?.name
+                DispatchQueue.main.async {
+                    switch fishName {
+                    case "shark":
+                        return
+                    case "firstFish":
+                        self.sharkScore += 10
+                        self.killFish(fish: fishInContact!, isSharkTheKiller: true)
+                    case "secondFish":
+                        self.sharkScore += 20
+                        self.killFish(fish: fishInContact!, isSharkTheKiller: true)
+                    case "thirdFish":
+                        self.sharkScore += 30
+                        self.killFish(fish: fishInContact!, isSharkTheKiller: true)
+                    default:
+                        return
+                    }
+                }
+            }
         }
-        
-
     }
     
     @objc func handleTap(_ gestureRecognice: UIGestureRecognizer) {
@@ -158,13 +167,13 @@ class ViewController: UIViewController, ARSCNViewDelegate{
                 return
             case "firstFish":
                 playerScore += 10
-                killFish(fish: node)
+                killFish(fish: node, isSharkTheKiller: false)
             case "secondFish":
                 playerScore += 20
-                killFish(fish: node)
+                killFish(fish: node, isSharkTheKiller: false)
             case "thirdFish":
                 playerScore += 30
-                killFish(fish: node)
+                killFish(fish: node, isSharkTheKiller: false)
             default:
                 return
             }
@@ -177,6 +186,9 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         let maxDistance = Float(3)
         let plane = SCNPlane(width: 0.6, height: 0.6)
         let shark = createAnyFish(image: UIImage(named: "sharkFirst")!, fishName: "shark", minDistance: minDistance, maxDistance: maxDistance, plane: plane)
+        shark.physicsBody?.categoryBitMask = CollisionCategory.sharkCategory.rawValue
+        shark.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
+        shark.physicsBody?.mass = CGFloat(3)
         sceneView.scene.rootNode.addChildNode(shark)
         self.sharkCreated = true
         return shark
@@ -199,7 +211,10 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         default:
             return
         }
-
+        
+        fish!.physicsBody?.categoryBitMask = CollisionCategory.targetCategory.rawValue
+        fish!.physicsBody?.contactTestBitMask = CollisionCategory.sharkCategory.rawValue
+        fish!.physicsBody?.mass = CGFloat(1)
         sceneView.scene.rootNode.addChildNode(fish!)
         self.fishesArray.append(fish!)
         self.moveFishes(fish: fish!)
@@ -219,7 +234,7 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         return fish
     }
     
-    func killFish(fish: SCNNode){
+    func killFish(fish: SCNNode, isSharkTheKiller: Bool){
         // Creamos, agrupamos y ejecutamos una serie de animaciones
         let scaleOut = SCNAction.scale(to: 2, duration: 0.4)
         let fadeOut = SCNAction.fadeOut(duration: 0.4)
@@ -230,6 +245,9 @@ class ViewController: UIViewController, ARSCNViewDelegate{
             self.fishesArray.remove(at: fishIndex)
         }
         fish.runAction(sequenceAction)
+        if isSharkTheKiller {
+            self.sharkTarget = nil
+        }
     }
     
     func moveFishes(fish: SCNNode) {
@@ -255,4 +273,49 @@ class ViewController: UIViewController, ARSCNViewDelegate{
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
+    func selectTarget() -> (node: SCNNode, distance: Float, distanceVector: SCNVector3) {
+        var distanceArray = [Float]()
+        var vectorArray = [SCNVector3]()
+        for node in self.fishesArray {
+            let (distanceVector, distance) = self.nodesDistance(nodeA: self.shark!, nodeB: node)
+            distanceArray.append(distance)
+            vectorArray.append(distanceVector)
+        }
+        let targetDistance = distanceArray.min()
+        let targetNode = self.fishesArray[distanceArray.firstIndex(of: targetDistance!)!]
+        let targetVector = vectorArray[distanceArray.firstIndex(of: targetDistance!)!]
+        return (targetNode, targetDistance!, targetVector)
+    }
+    
+    func nodesDistance(nodeA: SCNNode, nodeB: SCNNode) -> (distanceVector: SCNVector3, distance: Float) {
+        let distanceVector = SCNVector3(x: -1 * (nodeA.position.x - nodeB.position.x), y: -1 * (nodeA.position.y - nodeB.position.y), z: -1 * (nodeA.position.z
+        - nodeB.position.z))
+        let distance : Float = sqrtf(distanceVector.x * distanceVector.x + distanceVector.y * distanceVector.y + distanceVector.z * distanceVector.z)
+        return (distanceVector, distance)
+    }
+    
+    func chaseTarget(node: SCNNode, distance: Float, distanceVector: SCNVector3) {
+//        self.shark?.physicsBody?.applyForce(SCNVector3(distanceVector.x * 2, distanceVector.y * 2, distanceVector.z * 2), at: SCNVector3(0.0, 0.0, 0.0), asImpulse: true)
+        self.shark?.physicsBody?.applyForce(SCNVector3(distanceVector.x * 0.5, distanceVector.y * 0.5, distanceVector.z * 0.5), at: SCNVector3(0.0, 0.0, 0.0), asImpulse: true)
+//        let chaseFish = CABasicAnimation(keyPath: #keyPath(SCNNode.transform))
+//        chaseFish.fromValue = self.shark?.transform
+//        chaseFish.toValue = node.transform
+//        chaseFish.duration = 3
+//        self.shark!.addAnimation(chaseFish, forKey: nil)
+    }
+    
+    func createTarget() {
+        guard self.shark != nil else {return}
+        let (node, distance, distanceVector) = selectTarget()
+        chaseTarget(node: node, distance: distance, distanceVector: distanceVector)
+        self.sharkTarget = node
+    }
+    
+}
+
+struct CollisionCategory: OptionSet {
+    let rawValue: Int
+    
+    static let sharkCategory = CollisionCategory(rawValue: 1 << 0)
+    static let targetCategory = CollisionCategory(rawValue: 1 << 1)
 }
