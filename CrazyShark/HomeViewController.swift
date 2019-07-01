@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func helpAction(_ sender: Any) {
+        performSegue(withIdentifier: "homeToHelpSegue", sender: self)
     }
     
     @IBAction func playAction(_ sender: Any) {

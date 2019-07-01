@@ -128,13 +128,174 @@
                     <view key="view" contentMode="scaleToFill" id="fGU-qu-tjz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-DA-XZk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdW-ba-FME">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJA-Vo-xld">
+                                                <rect key="frame" x="94" y="63" width="187.5" height="39"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="QJA-Vo-xld" secondAttribute="height" multiplier="187:39" id="4Ri-Ej-Y39"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are three different fishes to catch. Each one will give you different game points." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VjS-81-d9n">
+                                                <rect key="frame" x="37.5" y="138" width="300" height="62.5"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firstFish" translatesAutoresizingMaskIntoConstraints="NO" id="DUb-a1-oBo">
+                                                <rect key="frame" x="131.5" y="250.5" width="112.5" height="72"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="DUb-a1-oBo" secondAttribute="height" multiplier="25:16" id="DSn-dI-eF2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr7-P5-mT7">
+                                                <rect key="frame" x="131.5" y="332.5" width="112.5" height="19"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fge-e9-7tC">
+                                                <rect key="frame" x="131.5" y="483.5" width="112.5" height="19"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1O3-fs-UOl">
+                                                <rect key="frame" x="131.5" y="622.5" width="112.5" height="19"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="secondFish" translatesAutoresizingMaskIntoConstraints="NO" id="8SC-jc-pDi">
+                                                <rect key="frame" x="131.5" y="401.5" width="112.5" height="72"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="8SC-jc-pDi" secondAttribute="height" multiplier="25:16" id="EZ0-Vw-5Cz"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thirdFish" translatesAutoresizingMaskIntoConstraints="NO" id="QiB-db-kcH">
+                                                <rect key="frame" x="131.5" y="552.5" width="112.5" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="QiB-db-kcH" secondAttribute="height" multiplier="15:8" id="Tm5-ip-Tey"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have to catch them tapping with your finger over them, adding points to your score." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1w-CU-EBI">
+                                                <rect key="frame" x="37.5" y="691.5" width="300" height="69"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="handPointingFish" translatesAutoresizingMaskIntoConstraints="NO" id="Bik-bk-2sE">
+                                                <rect key="frame" x="94" y="810.5" width="187.5" height="185"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Bik-bk-2sE" secondAttribute="height" multiplier="75:74" id="LmE-1A-nDN"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 60 seconds to collect as many point as possible. In order to win you must collect more points than the crazy shark." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynQ-6m-i76">
+                                                <rect key="frame" x="37.5" y="1045.5" width="300" height="69"/>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharkSurf" translatesAutoresizingMaskIntoConstraints="NO" id="BYL-kw-MUu">
+                                                <rect key="frame" x="94" y="1164.5" width="187.5" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="BYL-kw-MUu" secondAttribute="height" multiplier="187:128" id="Arw-OP-A5u"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zj5-vO-hof">
+                                                <rect key="frame" x="122" y="1362.5" width="131" height="31"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Zj5-vO-hof" secondAttribute="height" multiplier="131:31" id="czz-4H-6du"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
+                                                <state key="normal" title="Menu">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="menuAction:" destination="ix5-pF-d0n" eventType="touchUpInside" id="8E8-dK-3M0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.074509803920000006" green="0.74901960779999999" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="QiB-db-kcH" firstAttribute="width" secondItem="8SC-jc-pDi" secondAttribute="width" id="0aq-CU-BbY"/>
+                                            <constraint firstItem="QiB-db-kcH" firstAttribute="top" secondItem="Fge-e9-7tC" secondAttribute="bottom" constant="50" id="0nb-NW-zvy"/>
+                                            <constraint firstItem="Fge-e9-7tC" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="2p2-e4-OT6"/>
+                                            <constraint firstItem="QiB-db-kcH" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="3wd-qv-KUU"/>
+                                            <constraint firstItem="ynQ-6m-i76" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="5JM-tS-orO"/>
+                                            <constraint firstItem="VjS-81-d9n" firstAttribute="height" secondItem="QJA-Vo-xld" secondAttribute="height" multiplier="1.6" id="7se-8r-J4o"/>
+                                            <constraint firstItem="Zj5-vO-hof" firstAttribute="top" secondItem="BYL-kw-MUu" secondAttribute="bottom" constant="70" id="9kd-bj-PCf"/>
+                                            <constraint firstItem="8SC-jc-pDi" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="BIc-3u-5Bx"/>
+                                            <constraint firstItem="DUb-a1-oBo" firstAttribute="top" secondItem="VjS-81-d9n" secondAttribute="bottom" constant="50" id="CBX-uL-pp9"/>
+                                            <constraint firstItem="BYL-kw-MUu" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="KLM-3D-sOu"/>
+                                            <constraint firstItem="1O3-fs-UOl" firstAttribute="width" secondItem="QiB-db-kcH" secondAttribute="width" id="Kh7-nx-HgU"/>
+                                            <constraint firstItem="QJA-Vo-xld" firstAttribute="width" secondItem="vdW-ba-FME" secondAttribute="width" multiplier="0.5" id="LBK-7R-fFC"/>
+                                            <constraint firstItem="VjS-81-d9n" firstAttribute="width" secondItem="vdW-ba-FME" secondAttribute="width" multiplier="0.8" id="Lfu-Cs-NAG"/>
+                                            <constraint firstItem="Lr7-P5-mT7" firstAttribute="width" secondItem="DUb-a1-oBo" secondAttribute="width" id="PmM-xi-cyU"/>
+                                            <constraint firstItem="BYL-kw-MUu" firstAttribute="width" secondItem="Bik-bk-2sE" secondAttribute="width" id="PxO-rs-TVP"/>
+                                            <constraint firstItem="1O3-fs-UOl" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="RGR-U1-Tcm"/>
+                                            <constraint firstItem="DUb-a1-oBo" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="UCh-2J-SQ5"/>
+                                            <constraint firstItem="QJA-Vo-xld" firstAttribute="top" secondItem="vdW-ba-FME" secondAttribute="top" constant="63" id="UaK-7p-P5T"/>
+                                            <constraint firstItem="Zj5-vO-hof" firstAttribute="width" secondItem="BYL-kw-MUu" secondAttribute="width" multiplier="0.7" id="WH8-5F-as9"/>
+                                            <constraint firstItem="8SC-jc-pDi" firstAttribute="top" secondItem="Lr7-P5-mT7" secondAttribute="bottom" constant="50" id="aFM-sH-sRN"/>
+                                            <constraint firstItem="Lr7-P5-mT7" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="aGH-I8-6sI"/>
+                                            <constraint firstItem="ynQ-6m-i76" firstAttribute="width" secondItem="h1w-CU-EBI" secondAttribute="width" id="bTX-P0-3gA"/>
+                                            <constraint firstItem="ynQ-6m-i76" firstAttribute="top" secondItem="Bik-bk-2sE" secondAttribute="bottom" constant="50" id="cMx-3P-QGE"/>
+                                            <constraint firstItem="Fge-e9-7tC" firstAttribute="top" secondItem="8SC-jc-pDi" secondAttribute="bottom" constant="10" id="dPN-hP-j4P"/>
+                                            <constraint firstItem="1O3-fs-UOl" firstAttribute="top" secondItem="QiB-db-kcH" secondAttribute="bottom" constant="10" id="fty-bK-UG2"/>
+                                            <constraint firstAttribute="height" constant="1500" id="j7N-wr-cxO"/>
+                                            <constraint firstItem="VjS-81-d9n" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="k9S-UZ-nmJ"/>
+                                            <constraint firstItem="VjS-81-d9n" firstAttribute="top" secondItem="QJA-Vo-xld" secondAttribute="bottom" constant="36" id="kNP-fI-uT2"/>
+                                            <constraint firstItem="Bik-bk-2sE" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="ljh-52-M6t"/>
+                                            <constraint firstItem="h1w-CU-EBI" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="mFh-2E-6MP"/>
+                                            <constraint firstItem="Bik-bk-2sE" firstAttribute="top" secondItem="h1w-CU-EBI" secondAttribute="bottom" constant="50" id="mnF-kD-6MX"/>
+                                            <constraint firstItem="ynQ-6m-i76" firstAttribute="height" secondItem="h1w-CU-EBI" secondAttribute="height" id="oJg-sq-lW1"/>
+                                            <constraint firstItem="BYL-kw-MUu" firstAttribute="top" secondItem="ynQ-6m-i76" secondAttribute="bottom" constant="50" id="p2h-dW-NHU"/>
+                                            <constraint firstItem="Fge-e9-7tC" firstAttribute="width" secondItem="8SC-jc-pDi" secondAttribute="width" id="sJm-7T-Vyt"/>
+                                            <constraint firstItem="h1w-CU-EBI" firstAttribute="height" secondItem="VjS-81-d9n" secondAttribute="height" multiplier="1.1" id="sjq-yN-bMd"/>
+                                            <constraint firstItem="Zj5-vO-hof" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="ttQ-Bg-b09"/>
+                                            <constraint firstItem="8SC-jc-pDi" firstAttribute="width" secondItem="DUb-a1-oBo" secondAttribute="width" id="wSa-6L-xgy"/>
+                                            <constraint firstItem="Lr7-P5-mT7" firstAttribute="top" secondItem="DUb-a1-oBo" secondAttribute="bottom" constant="10" id="xIB-Lz-PTz"/>
+                                            <constraint firstItem="QJA-Vo-xld" firstAttribute="centerX" secondItem="vdW-ba-FME" secondAttribute="centerX" id="xWt-km-hSl"/>
+                                            <constraint firstItem="h1w-CU-EBI" firstAttribute="top" secondItem="1O3-fs-UOl" secondAttribute="bottom" constant="50" id="xeS-F1-8Jy"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vdW-ba-FME" firstAttribute="width" secondItem="jnj-DA-XZk" secondAttribute="width" id="AmR-aE-ToM"/>
+                                    <constraint firstItem="vdW-ba-FME" firstAttribute="leading" secondItem="jnj-DA-XZk" secondAttribute="leading" id="Efe-ky-hQE"/>
+                                    <constraint firstItem="vdW-ba-FME" firstAttribute="top" secondItem="jnj-DA-XZk" secondAttribute="top" id="alK-Hl-gAX"/>
+                                    <constraint firstAttribute="bottom" secondItem="vdW-ba-FME" secondAttribute="bottom" id="aqr-jX-ec4"/>
+                                    <constraint firstAttribute="trailing" secondItem="vdW-ba-FME" secondAttribute="trailing" id="zcS-xR-GTx"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Bik-bk-2sE" firstAttribute="width" secondItem="fGU-qu-tjz" secondAttribute="width" multiplier="0.5" id="6jT-M7-ezI"/>
+                            <constraint firstItem="jnj-DA-XZk" firstAttribute="leading" secondItem="fGU-qu-tjz" secondAttribute="leading" id="9OW-ud-2vG"/>
+                            <constraint firstAttribute="trailing" secondItem="jnj-DA-XZk" secondAttribute="trailing" id="JDX-KJ-M6R"/>
+                            <constraint firstAttribute="bottom" secondItem="jnj-DA-XZk" secondAttribute="bottom" id="MM8-6q-cgG"/>
+                            <constraint firstItem="DUb-a1-oBo" firstAttribute="width" secondItem="fGU-qu-tjz" secondAttribute="width" multiplier="0.3" id="TZu-9H-u7d"/>
+                            <constraint firstItem="h1w-CU-EBI" firstAttribute="width" secondItem="fGU-qu-tjz" secondAttribute="width" multiplier="0.8" id="dDz-5L-3Eo"/>
+                            <constraint firstItem="jnj-DA-XZk" firstAttribute="top" secondItem="fGU-qu-tjz" secondAttribute="top" id="vvo-Sn-4bA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6bv-OW-lfu"/>
                     </view>
+                    <connections>
+                        <outlet property="menuButton" destination="Zj5-vO-hof" id="S8K-a2-3Mn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2L3-mF-mtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="-727"/>
+            <point key="canvasLocation" x="837.60000000000002" y="-830.2848575712145"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -147,13 +308,13 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXu-Cs-7aR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </arscnView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharkFirst" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-sH-aoq">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharkSurf" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-sH-aoq">
                                 <rect key="frame" x="0.0" y="551" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6aa-sH-aoq" secondAttribute="height" multiplier="1:1" id="cun-e3-9ZF"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thirdFish" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pjh-Nk-PRg">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fihserman" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pjh-Nk-PRg">
                                 <rect key="frame" x="300" y="551" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pjh-Nk-PRg" secondAttribute="height" multiplier="1:1" id="ayy-Th-aYh"/>
@@ -225,8 +386,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="fihserman" width="200" height="241"/>
+        <image name="firstFish" width="200" height="144"/>
+        <image name="handPointingFish" width="300" height="296"/>
         <image name="introBackground1" width="750" height="1334"/>
-        <image name="sharkFirst" width="468" height="329"/>
+        <image name="secondFish" width="200" height="121"/>
         <image name="sharkSurf" width="512" height="524"/>
         <image name="thirdFish" width="200" height="155"/>
     </resources>

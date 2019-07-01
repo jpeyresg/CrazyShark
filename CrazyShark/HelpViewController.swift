@@ -10,13 +10,18 @@ import UIKit
 
 class HelpViewController: UIViewController {
 
+    @IBOutlet weak var menuButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        menuButton.backgroundColor = .red
+        menuButton.layer.cornerRadius = menuButton.bounds.height / 2
     }
     
-
+    @IBAction func menuAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

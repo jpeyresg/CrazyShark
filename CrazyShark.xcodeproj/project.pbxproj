@@ -15,8 +15,6 @@
 		70AED96622AEB20B0031A006 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96422AEB20B0031A006 /* Main.storyboard */; };
 		70AED96822AEB20C0031A006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96722AEB20C0031A006 /* Assets.xcassets */; };
 		70AED96B22AEB20C0031A006 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96922AEB20C0031A006 /* LaunchScreen.storyboard */; };
-		70AF0E1122B54B3900C7DAFA /* SharkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */; };
-		70AF0E1222B54B3900C7DAFA /* SharkMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +28,6 @@
 		70AED96722AEB20C0031A006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70AED96A22AEB20C0031A006 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70AED96C22AEB20C0031A006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharkMenu.swift; sourceTree = "<group>"; };
-		70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharkMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +66,6 @@
 				70AED96722AEB20C0031A006 /* Assets.xcassets */,
 				70AED96922AEB20C0031A006 /* LaunchScreen.storyboard */,
 				70AED96C22AEB20C0031A006 /* Info.plist */,
-				70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */,
-				70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */,
 				704CAB6E22C91EBA000571AD /* HomeViewController.swift */,
 				704CAB7022C91F02000571AD /* HelpViewController.swift */,
 				7042EA4322CA47390050F8A7 /* SplashViewController.swift */,
@@ -138,7 +132,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				70AED96B22AEB20C0031A006 /* LaunchScreen.storyboard in Resources */,
-				70AF0E1222B54B3900C7DAFA /* SharkMenu.xib in Resources */,
 				70AED96822AEB20C0031A006 /* Assets.xcassets in Resources */,
 				70AED96622AEB20B0031A006 /* Main.storyboard in Resources */,
 			);
@@ -153,7 +146,6 @@
 			files = (
 				70AED96322AEB20B0031A006 /* ViewController.swift in Sources */,
 				70AED95D22AEB20B0031A006 /* AppDelegate.swift in Sources */,
-				70AF0E1122B54B3900C7DAFA /* SharkMenu.swift in Sources */,
 				7042EA4422CA47390050F8A7 /* SplashViewController.swift in Sources */,
 				704CAB6F22C91EBA000571AD /* HomeViewController.swift in Sources */,
 				704CAB7122C91F02000571AD /* HelpViewController.swift in Sources */,
