@@ -14,14 +14,16 @@ import GameplayKit
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
     @IBOutlet var sceneView: ARSCNView!
-    var fishTimer : Timer?
     var gameTimer : Timer?
-    var sharkTimer : Timer?
+    var progressBarTimer: Timer?
+    var gameSeconds = 60
     var fishesArray = [SCNNode]()
     var shark : SCNNode?
+//    var sharkRightImage = UIImage(named: "sharkFirst")
+//    var sharkLeftImage = UIImage(named: "sharkFirst")?.withHorizontallyFlippedOrientation()
     @IBOutlet var sharkScoreText: UILabel!
     @IBOutlet var playerScoreText: UILabel!
-    var sharkCreated = false
+//    var sharkCreated = false
     var fishBeingKilled : SCNNode?
     var sharkTarget : SCNNode? {
         didSet{
@@ -40,6 +42,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             self.playerScoreText.text = "\(self.playerScore)"
         }
     }
+    @IBOutlet weak var menuButton: UIButton!
+    @IBAction func menuButtonAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Funciones del ViewController
     
@@ -54,6 +60,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
 
         // Show statistics such as fps and node count
         sceneView.showsStatistics = false
+        menuButton.layer.cornerRadius = menuButton.bounds.height / 2
+        menuButton.backgroundColor = UIColor(red: (105/255), green: (183/255), blue: (230/255), alpha: 1)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.handleTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
@@ -61,8 +69,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         for _ in 0...19 {
             self.createFish()
         }
-        self.shark = self.createShark()
-            }
+        shark = self.createShark()
+        playerScore = 0
+        sharkScore = 0
+        createTarget()
+        progressBar.progress = 1.0
+        runGameTimer()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,22 +85,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
 
         // Run the view's session
         sceneView.session.run(configuration)
-        
-        playerScore = 0
-        sharkScore = 0
-        fishTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (fishTimer) in
-
-            
-            if self.fishesArray.count < 10 {
-                self.createFish()
-            }
-        })
-        
-        gameTimer = Timer.init(fire: Date(), interval: 120, repeats: false, block: { (gameTimer) in
-            // falta el codigo para la barrita de progreso
-
-        })
-
 
     }
     
@@ -156,8 +153,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     @objc func handleTap(_ gestureRecognice: UIGestureRecognizer) {
 
-        let results = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), types: ARHitTestResult.ResultType.featurePoint)
-        guard let _ : ARHitTestResult = results.first else {return}
+        let _ = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), types: ARHitTestResult.ResultType.featurePoint)
+//        guard let _ : ARHitTestResult = results.first else {return}
         let tappedNode = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), options: nil)
         if !tappedNode.isEmpty {
             let node = tappedNode[0].node
@@ -186,12 +183,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         let minDistance = Float(1)
         let maxDistance = Float(3)
         let plane = SCNPlane(width: 0.6, height: 0.6)
-        let shark = createAnyFish(image: UIImage(named: "sharkFirst")!, fishName: "shark", minDistance: minDistance, maxDistance: maxDistance, plane: plane)
+        let shark = createAnyFish(image: UIImage(named: "sharkRight")!, fishName: "shark", minDistance: minDistance, maxDistance: maxDistance, plane: plane)
         shark.physicsBody?.categoryBitMask = CollisionCategory.sharkCategory.rawValue
         shark.physicsBody?.collisionBitMask = CollisionCategory.targetCategory.rawValue
         shark.physicsBody?.mass = CGFloat(3)
         sceneView.scene.rootNode.addChildNode(shark)
-        self.sharkCreated = true
         return shark
     }
     
@@ -302,14 +298,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     }
     
     func chaseTarget(node: SCNNode, distance: Float, distanceVector: SCNVector3) {
-        let speed : Float = 0.2
+        let speed : Float = 0.1
         let timeToTarget = Double(distance / speed)
         let chaseFish = SCNAction.move(by: distanceVector, duration: timeToTarget)
+        if distanceVector.x < 0 {
+            SCNTransaction.begin()
+            let materials = self.shark!.geometry?.materials
+            let material = materials![0]
+            material.diffuse.contents = UIImage(named: "sharLeft")
+            SCNTransaction.commit()
+//            shark?.geometry?.firstMaterial?.diffuse.contents = sharkLeftImage
+        } else {
+            SCNTransaction.begin()
+            let materials = self.shark!.geometry?.materials
+            let material = materials![0]
+            material.diffuse.contents = UIImage(named: "sharkRight")
+            SCNTransaction.commit()
+//            shark?.geometry?.firstMaterial?.diffuse.contents = sharkRightImage
+        }
         self.shark?.runAction(chaseFish)
-        
-//        self.shark?.physicsBody?.clearAllForces()
-//        self.shark?.physicsBody?.applyForce(SCNVector3(distanceVector.x * speed, distanceVector.y * speed, distanceVector.z * speed), at: SCNVector3(0.0, 0.0, 0.0), asImpulse: true)
-
     }
     
     func createTarget() {
@@ -317,6 +324,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         let (node, distance, distanceVector) = selectTarget()
         chaseTarget(node: node, distance: distance, distanceVector: distanceVector)
         self.sharkTarget = node
+    }
+    
+    func runGameTimer() {
+        self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateGameTimer), userInfo: nil, repeats: true)
+        self.progressBarTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func updateGameTimer() {
+        if gameSeconds == 0 {
+            gameTimer?.invalidate()
+            gameOver()
+        } else {
+            gameSeconds -= 1
+
+            if self.fishesArray.count < 10 {
+                for _ in 0...5 {
+                    self.createFish()
+                }
+            }
+            if (gameSeconds % 2) == 0{
+                createTarget()
+            }
+        }
+    }
+    
+    func gameOver() {
+        let defaults = UserDefaults.standard
+        defaults.set(playerScore, forKey: "score")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var progressBar: UIProgressView!
+    
+    @objc func updateProgressBar(){
+        progressBar.progress -= 0.001667
+        progressBar.setProgress(progressBar.progress, animated: true)
     }
     
 }

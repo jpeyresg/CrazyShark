@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0XS-1i-ZIP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,132 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="UET-Oe-mRz">
+            <objects>
+                <viewController id="0XS-1i-ZIP" customClass="SplashViewController" customModule="CrazyShark" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g3I-gf-HdI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="introBackground1" translatesAutoresizingMaskIntoConstraints="NO" id="2DE-qX-zEf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharkSurf" translatesAutoresizingMaskIntoConstraints="NO" id="8Hv-Ao-Wdb">
+                                <rect key="frame" x="56.5" y="100" width="262.5" height="467"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8Hv-Ao-Wdb" secondAttribute="height" multiplier="375:667" id="HYm-Cb-cc9"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="2DE-qX-zEf" firstAttribute="width" secondItem="g3I-gf-HdI" secondAttribute="width" id="KgW-ch-tns"/>
+                            <constraint firstItem="8Hv-Ao-Wdb" firstAttribute="height" secondItem="g3I-gf-HdI" secondAttribute="height" multiplier="0.7" id="Rpy-BF-F4W"/>
+                            <constraint firstItem="8Hv-Ao-Wdb" firstAttribute="centerY" secondItem="g3I-gf-HdI" secondAttribute="centerY" id="Tf6-y4-4JP"/>
+                            <constraint firstItem="2DE-qX-zEf" firstAttribute="centerX" secondItem="g3I-gf-HdI" secondAttribute="centerX" id="bOH-Yc-UN1"/>
+                            <constraint firstItem="2DE-qX-zEf" firstAttribute="height" secondItem="g3I-gf-HdI" secondAttribute="height" id="vhk-Zt-sKH"/>
+                            <constraint firstItem="2DE-qX-zEf" firstAttribute="centerY" secondItem="g3I-gf-HdI" secondAttribute="centerY" id="wXx-Q8-gyZ"/>
+                            <constraint firstItem="8Hv-Ao-Wdb" firstAttribute="centerX" secondItem="g3I-gf-HdI" secondAttribute="centerX" id="z0e-R5-d4l"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="maI-wy-BF7"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="2DE-qX-zEf" id="5dp-ia-v3b"/>
+                        <segue destination="mE1-yQ-5nW" kind="presentation" identifier="splashToHomeSegue" id="ZDO-sg-Mpw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sXT-HF-oym" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2441" y="26"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="wWO-bg-Cnl">
+            <objects>
+                <viewController id="mE1-yQ-5nW" customClass="HomeViewController" customModule="CrazyShark" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h7K-aL-Sbh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ultima Puntuación: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYe-SR-3AT">
+                                <rect key="frame" x="93.5" y="92" width="188.5" height="24"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sharkSurf" translatesAutoresizingMaskIntoConstraints="NO" id="Reb-Mc-IqB">
+                                <rect key="frame" x="121" y="150" width="133" height="133.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Reb-Mc-IqB" secondAttribute="height" multiplier="1:1" id="iYc-E2-QnD"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSL-FX-KGC">
+                                <rect key="frame" x="131.5" y="362" width="112.5" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sSL-FX-KGC" secondAttribute="height" multiplier="56:17" id="FQR-Qk-9qh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <state key="normal" title="Help">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="helpAction:" destination="mE1-yQ-5nW" eventType="touchUpInside" id="Aax-DB-fFU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KpL-Uq-2Po">
+                                <rect key="frame" x="131.5" y="436" width="112.5" height="34"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <state key="normal" title="Play">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="playAction:" destination="mE1-yQ-5nW" eventType="touchUpInside" id="iya-BB-Gn8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.074509803921568626" green="0.74901960784313726" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Reb-Mc-IqB" firstAttribute="height" secondItem="h7K-aL-Sbh" secondAttribute="height" multiplier="0.2" id="095-d0-fnQ"/>
+                            <constraint firstItem="Reb-Mc-IqB" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="0tf-13-344"/>
+                            <constraint firstItem="Reb-Mc-IqB" firstAttribute="top" secondItem="h7K-aL-Sbh" secondAttribute="top" constant="150" id="4sr-Yt-u1A"/>
+                            <constraint firstItem="KpL-Uq-2Po" firstAttribute="width" secondItem="sSL-FX-KGC" secondAttribute="width" id="Egq-jI-ziB"/>
+                            <constraint firstItem="KpL-Uq-2Po" firstAttribute="top" secondItem="sSL-FX-KGC" secondAttribute="bottom" constant="40" id="FVu-uL-p35"/>
+                            <constraint firstItem="KpL-Uq-2Po" firstAttribute="height" secondItem="sSL-FX-KGC" secondAttribute="height" id="ViQ-th-kwS"/>
+                            <constraint firstItem="sSL-FX-KGC" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="Wh8-Hw-Jol"/>
+                            <constraint firstItem="sSL-FX-KGC" firstAttribute="width" secondItem="h7K-aL-Sbh" secondAttribute="width" multiplier="0.3" id="jHd-yc-uoM"/>
+                            <constraint firstItem="jYe-SR-3AT" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="jV5-qB-ZdG"/>
+                            <constraint firstItem="KpL-Uq-2Po" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="q3H-D3-wz9"/>
+                            <constraint firstItem="Reb-Mc-IqB" firstAttribute="top" secondItem="jYe-SR-3AT" secondAttribute="bottom" constant="34" id="tjx-tH-6b6"/>
+                            <constraint firstItem="sSL-FX-KGC" firstAttribute="top" secondItem="Reb-Mc-IqB" secondAttribute="bottom" constant="78.5" id="vld-aa-VZv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ro1-Ma-Oqx"/>
+                    </view>
+                    <connections>
+                        <outlet property="helpButton" destination="sSL-FX-KGC" id="HBq-Ji-EJ8"/>
+                        <outlet property="playButton" destination="KpL-Uq-2Po" id="WGL-If-2j8"/>
+                        <outlet property="scoreLabel" destination="jYe-SR-3AT" id="RQF-5p-JnA"/>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="homeToGameSegue" id="7bx-N1-ORm"/>
+                        <segue destination="ix5-pF-d0n" kind="presentation" identifier="homeToHelpSegue" id="aBB-yw-Ju9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LRz-5t-xVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1225" y="26"/>
+        </scene>
+        <!--Help View Controller-->
+        <scene sceneID="Jq8-Km-pKR">
+            <objects>
+                <viewController id="ix5-pF-d0n" customClass="HelpViewController" customModule="CrazyShark" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fGU-qu-tjz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6bv-OW-lfu"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2L3-mF-mtR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="-727"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -45,12 +171,29 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1e1-qS-SBJ">
+                                <rect key="frame" x="94" y="645" width="187.5" height="2"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BW9-qh-PtC">
+                                <rect key="frame" x="150" y="596" width="75" height="30"/>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="menuButtonAction:" destination="BV1-FR-VrT" eventType="touchUpInside" id="F7i-1h-eE6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="BW9-qh-PtC" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="0Zg-iD-g0N"/>
                             <constraint firstItem="qd7-M5-c11" firstAttribute="width" secondItem="UdB-YX-Cfk" secondAttribute="width" id="0nf-9M-Pef"/>
                             <constraint firstItem="UdB-YX-Cfk" firstAttribute="width" secondItem="6aa-sH-aoq" secondAttribute="width" id="1ll-Rv-OTU"/>
+                            <constraint firstItem="1e1-qS-SBJ" firstAttribute="top" secondItem="BW9-qh-PtC" secondAttribute="bottom" constant="19" id="2kX-Ta-kfE"/>
                             <constraint firstItem="LXu-Cs-7aR" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="4bo-qM-VuI"/>
+                            <constraint firstItem="BW9-qh-PtC" firstAttribute="width" secondItem="LXu-Cs-7aR" secondAttribute="width" multiplier="0.2" id="5JD-qS-qAW"/>
+                            <constraint firstItem="1e1-qS-SBJ" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="ADB-8M-YX9"/>
+                            <constraint firstItem="1e1-qS-SBJ" firstAttribute="width" secondItem="LXu-Cs-7aR" secondAttribute="width" multiplier="0.5" id="CNP-10-ZVe"/>
                             <constraint firstAttribute="top" secondItem="LXu-Cs-7aR" secondAttribute="top" id="Kji-3B-liO"/>
                             <constraint firstItem="pjh-Nk-PRg" firstAttribute="trailing" secondItem="LXu-Cs-7aR" secondAttribute="trailing" id="N1C-mb-tr8"/>
                             <constraint firstItem="qd7-M5-c11" firstAttribute="width" secondItem="pjh-Nk-PRg" secondAttribute="width" id="Puc-le-gjW"/>
@@ -59,6 +202,7 @@
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="LXu-Cs-7aR" secondAttribute="bottom" id="WjM-qy-jm8"/>
                             <constraint firstItem="UdB-YX-Cfk" firstAttribute="width" secondItem="LXu-Cs-7aR" secondAttribute="width" multiplier="0.2" id="ZuZ-OL-Klp"/>
                             <constraint firstItem="qd7-M5-c11" firstAttribute="top" secondItem="pjh-Nk-PRg" secondAttribute="bottom" id="aJI-pY-JzT"/>
+                            <constraint firstItem="1e1-qS-SBJ" firstAttribute="top" secondItem="LXu-Cs-7aR" secondAttribute="bottom" constant="-22" id="bbB-Kx-IQk"/>
                             <constraint firstItem="qd7-M5-c11" firstAttribute="bottom" secondItem="LXu-Cs-7aR" secondAttribute="bottom" id="evB-4m-vBX"/>
                             <constraint firstItem="qd7-M5-c11" firstAttribute="trailing" secondItem="LXu-Cs-7aR" secondAttribute="trailing" id="fOb-gv-2fK"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="LXu-Cs-7aR" secondAttribute="trailing" id="j04-sq-H2a"/>
@@ -68,7 +212,9 @@
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="menuButton" destination="BW9-qh-PtC" id="vZJ-ha-gtq"/>
                         <outlet property="playerScoreText" destination="qd7-M5-c11" id="y0A-M7-ceS"/>
+                        <outlet property="progressBar" destination="1e1-qS-SBJ" id="0bx-de-KpA"/>
                         <outlet property="sceneView" destination="LXu-Cs-7aR" id="Nvy-tJ-O79"/>
                         <outlet property="sharkScoreText" destination="UdB-YX-Cfk" id="fP0-AU-7dw"/>
                     </connections>
@@ -79,7 +225,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="introBackground1" width="750" height="1334"/>
         <image name="sharkFirst" width="468" height="329"/>
+        <image name="sharkSurf" width="512" height="524"/>
         <image name="thirdFish" width="200" height="155"/>
     </resources>
 </document>

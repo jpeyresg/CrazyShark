@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7042EA4422CA47390050F8A7 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7042EA4322CA47390050F8A7 /* SplashViewController.swift */; };
+		704CAB6F22C91EBA000571AD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704CAB6E22C91EBA000571AD /* HomeViewController.swift */; };
+		704CAB7122C91F02000571AD /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704CAB7022C91F02000571AD /* HelpViewController.swift */; };
 		70AED95D22AEB20B0031A006 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AED95C22AEB20B0031A006 /* AppDelegate.swift */; };
 		70AED96322AEB20B0031A006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AED96222AEB20B0031A006 /* ViewController.swift */; };
 		70AED96622AEB20B0031A006 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AED96422AEB20B0031A006 /* Main.storyboard */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7042EA4322CA47390050F8A7 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		704CAB6E22C91EBA000571AD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		704CAB7022C91F02000571AD /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		70AED95922AEB20B0031A006 /* CrazyShark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrazyShark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AED95C22AEB20B0031A006 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70AED96222AEB20B0031A006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +72,9 @@
 				70AED96C22AEB20C0031A006 /* Info.plist */,
 				70AF0E0F22B54B3900C7DAFA /* SharkMenu.swift */,
 				70AF0E1022B54B3900C7DAFA /* SharkMenu.xib */,
+				704CAB6E22C91EBA000571AD /* HomeViewController.swift */,
+				704CAB7022C91F02000571AD /* HelpViewController.swift */,
+				7042EA4322CA47390050F8A7 /* SplashViewController.swift */,
 			);
 			path = CrazyShark;
 			sourceTree = "<group>";
@@ -145,6 +154,9 @@
 				70AED96322AEB20B0031A006 /* ViewController.swift in Sources */,
 				70AED95D22AEB20B0031A006 /* AppDelegate.swift in Sources */,
 				70AF0E1122B54B3900C7DAFA /* SharkMenu.swift in Sources */,
+				7042EA4422CA47390050F8A7 /* SplashViewController.swift in Sources */,
+				704CAB6F22C91EBA000571AD /* HomeViewController.swift in Sources */,
+				704CAB7122C91F02000571AD /* HelpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
