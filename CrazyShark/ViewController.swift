@@ -16,7 +16,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     @IBOutlet var sceneView: ARSCNView!
     var gameTimer : Timer?
     var progressBarTimer: Timer?
-    var gameSeconds = 10
+    var gameSeconds = 60
     var fishesArray = [SCNNode]()
     var shark : SCNNode?
 //    var sharkRightImage = UIImage(named: "sharkFirst")
@@ -172,9 +172,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             case "thirdFish":
                 playerScore += 30
                 killFish(fish: node)
-            case "youWin":
-                self.dismiss(animated: true, completion: nil)
-            case "youLose":
+            case "gameOver":
                 self.dismiss(animated: true, completion: nil)
             default:
                 return
@@ -363,31 +361,20 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
 //        let gameOverFrame = createAnyFish(image: UIImage(named: "crazysharkframe")!, fishName: "youWin", minDistance: 0, maxDistance: 0, plane: SCNPlane(width: 1, height: 2))
 //        sceneView.scene.rootNode.addChildNode(gameOverFrame)
         let gameOverPlane = SCNPlane(width: 1, height: 2)
-        gameOverPlane.firstMaterial?.diffuse.contents = UIImage(named: "crazysharkframe")
-        let gameOverFrame = SCNNode(geometry: gameOverPlane)
-        gameOverFrame.name = "youWin"
-        gameOverFrame.position = SCNVector3(0, 0, -2)
-        sceneView.pointOfView?.addChildNode(gameOverFrame)
+        
         if playerScore > sharkScore {
             let defaults = UserDefaults.standard
             defaults.set(playerScore, forKey: "score")
-            let youWin = SCNText(string: "YOU WIN", extrusionDepth: 1)
-            youWin.font = UIFont(name: "Marker Felt", size: 120)
-            youWin.firstMaterial!.diffuse.contents = UIColor(red: (19/255), green: (191/255), blue: (237/255), alpha: 1)
-            let youWinNode = SCNNode(geometry: youWin)
-            youWinNode.name = "youWin"
-            gameOverFrame.addChildNode(youWinNode)
+            gameOverPlane.firstMaterial?.diffuse.contents = UIImage(named: "youWinFrame")
         } else {
-            let youLose = SCNText(string: "YOU LOSE", extrusionDepth: 1)
-            youLose.font = UIFont(name: "Marker_Felt", size: 10)
-            youLose.firstMaterial!.diffuse.contents = UIColor(red: (19/255), green: (191/255), blue: (237/255), alpha: 1)
-            let youLoseNode = SCNNode(geometry: youLose)
-            youLoseNode.name = "youLose"
-            youLoseNode.position = SCNVector3(x: 0, y: 0, z: -1.5)
-            gameOverFrame.addChildNode(youLoseNode)
+            
+            gameOverPlane.firstMaterial?.diffuse.contents = UIImage(named: "youLoseFrame")
             
         }
-        
+        let gameOverFrame = SCNNode(geometry: gameOverPlane)
+        gameOverFrame.name = "gameOver"
+        gameOverFrame.position = SCNVector3(0, 0, -2)
+        sceneView.pointOfView?.addChildNode(gameOverFrame)
     }
     
     @IBOutlet weak var progressBar: UIProgressView!

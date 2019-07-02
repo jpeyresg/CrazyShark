@@ -20,6 +20,15 @@ class HomeViewController: UIViewController {
         helpButton.backgroundColor = .red
         playButton.layer.cornerRadius = playButton.bounds.height / 2
         playButton.backgroundColor = .red
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        if let gameScore = defaults.value(forKey: "score"){
+            let score = gameScore as! Int
+            scoreLabel.text = "Last Score: \(score)"
+        }
     }
     
     @IBAction func helpAction(_ sender: Any) {
