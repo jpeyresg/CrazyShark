@@ -18,6 +18,8 @@
 		70BEA5A022CB273400599815 /* crazySharkMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BEA59F22CB273400599815 /* crazySharkMusic.mp3 */; };
 		70BEA5A322CB2B4100599815 /* fishCatched.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BEA5A122CB2B4100599815 /* fishCatched.mp3 */; };
 		70BEA5A422CB2B4100599815 /* sharkBite.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BEA5A222CB2B4100599815 /* sharkBite.mp3 */; };
+		70BEA5A722CB360000599815 /* winGameSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BEA5A522CB35FF00599815 /* winGameSound.mp3 */; };
+		70BEA5A822CB360000599815 /* lostGameSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70BEA5A622CB360000599815 /* lostGameSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		70BEA59F22CB273400599815 /* crazySharkMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crazySharkMusic.mp3; sourceTree = "<group>"; };
 		70BEA5A122CB2B4100599815 /* fishCatched.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fishCatched.mp3; sourceTree = "<group>"; };
 		70BEA5A222CB2B4100599815 /* sharkBite.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sharkBite.mp3; sourceTree = "<group>"; };
+		70BEA5A522CB35FF00599815 /* winGameSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = winGameSound.mp3; sourceTree = "<group>"; };
+		70BEA5A622CB360000599815 /* lostGameSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lostGameSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 		70BEA59E22CB26FA00599815 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				70BEA5A622CB360000599815 /* lostGameSound.mp3 */,
+				70BEA5A522CB35FF00599815 /* winGameSound.mp3 */,
 				70BEA5A122CB2B4100599815 /* fishCatched.mp3 */,
 				70BEA5A222CB2B4100599815 /* sharkBite.mp3 */,
 				70BEA59F22CB273400599815 /* crazySharkMusic.mp3 */,
@@ -151,6 +157,8 @@
 				70BEA5A422CB2B4100599815 /* sharkBite.mp3 in Resources */,
 				70BEA5A022CB273400599815 /* crazySharkMusic.mp3 in Resources */,
 				70AED96B22AEB20C0031A006 /* LaunchScreen.storyboard in Resources */,
+				70BEA5A722CB360000599815 /* winGameSound.mp3 in Resources */,
+				70BEA5A822CB360000599815 /* lostGameSound.mp3 in Resources */,
 				70AED96822AEB20C0031A006 /* Assets.xcassets in Resources */,
 				70AED96622AEB20B0031A006 /* Main.storyboard in Resources */,
 				70BEA5A322CB2B4100599815 /* fishCatched.mp3 in Resources */,

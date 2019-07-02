@@ -75,6 +75,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         createTarget()
         progressBar.progress = 1.0
         runGameTimer()
+        playBackgroundMusic()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,12 +138,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
                     case "firstFish":
                         self.sharkScore += 10
                         self.killFish(fish: fishInContact!)
+                        self.playSound(sound: "sharkBite", format: "mp3")
                     case "secondFish":
                         self.sharkScore += 20
                         self.killFish(fish: fishInContact!)
+                        self.playSound(sound: "sharkBite", format: "mp3")
                     case "thirdFish":
                         self.sharkScore += 30
                         self.killFish(fish: fishInContact!)
+                        self.playSound(sound: "sharkBite", format: "mp3")
                     default:
                         return
                     }
@@ -166,12 +170,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             case "firstFish":
                 playerScore += 10
                 killFish(fish: node)
+                self.playSound(sound: "fishCatched", format: "mp3")
             case "secondFish":
                 playerScore += 20
                 killFish(fish: node)
+                self.playSound(sound: "fishCatched", format: "mp3")
             case "thirdFish":
                 playerScore += 30
                 killFish(fish: node)
+                self.playSound(sound: "fishCatched", format: "mp3")
             case "gameOver":
                 self.dismiss(animated: true, completion: nil)
             default:
@@ -358,30 +365,63 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             fishesArray[i].removeFromParentNode()
         }
         fishesArray.removeAll()
-//        let gameOverFrame = createAnyFish(image: UIImage(named: "crazysharkframe")!, fishName: "youWin", minDistance: 0, maxDistance: 0, plane: SCNPlane(width: 1, height: 2))
-//        sceneView.scene.rootNode.addChildNode(gameOverFrame)
+
         let gameOverPlane = SCNPlane(width: 1, height: 2)
         
         if playerScore > sharkScore {
             let defaults = UserDefaults.standard
             defaults.set(playerScore, forKey: "score")
             gameOverPlane.firstMaterial?.diffuse.contents = UIImage(named: "youWinFrame")
+            playSound(sound: "winGameSound", format: "mp3")
         } else {
-            
             gameOverPlane.firstMaterial?.diffuse.contents = UIImage(named: "youLoseFrame")
-            
+            playSound(sound: "lostGameSound", format: "mp3")
         }
+        
         let gameOverFrame = SCNNode(geometry: gameOverPlane)
         gameOverFrame.name = "gameOver"
         gameOverFrame.position = SCNVector3(0, 0, -2)
         sceneView.pointOfView?.addChildNode(gameOverFrame)
     }
     
+    // MARK: - barra de progreso de tiempo
+    
     @IBOutlet weak var progressBar: UIProgressView!
     
     @objc func updateProgressBar(){
         progressBar.progress -= 0.001667
         progressBar.setProgress(progressBar.progress, animated: true)
+    }
+    
+    // MARK: - sonidos
+    
+    var player: AVAudioPlayer?
+    
+    func playSound(sound : String, format: String) {
+        guard let url = Bundle.main.url(forResource: sound, withExtension: format) else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            
+            guard let player = player else { return }
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func playBackgroundMusic(){
+        let audioNode = SCNNode()
+        let audioSource = SCNAudioSource(fileNamed: "crazySharkMusic.mp3")!
+        let audioPlayer = SCNAudioPlayer(source: audioSource)
+        
+        audioNode.addAudioPlayer(audioPlayer)
+        
+        let play = SCNAction.playAudio(audioSource, waitForCompletion: true)
+        audioNode.runAction(play)
+        sceneView.scene.rootNode.addChildNode(audioNode)
     }
     
 }
