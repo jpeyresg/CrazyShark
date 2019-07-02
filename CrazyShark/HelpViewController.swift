@@ -11,6 +11,8 @@ import UIKit
 class HelpViewController: UIViewController {
 
     @IBOutlet weak var menuButton: UIButton!
+    
+    // MARK: - ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,18 +20,11 @@ class HelpViewController: UIViewController {
         menuButton.layer.cornerRadius = menuButton.bounds.height / 2
     }
     
+    // MARK: - Buttons
+    
+    // El botón menu nos lleva de vuelta al viewcontroller que contiene el menu
     @IBAction func menuAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

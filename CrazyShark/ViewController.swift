@@ -13,17 +13,16 @@ import GameplayKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
     
+    // MARK: - Variables
+    
     @IBOutlet var sceneView: ARSCNView!
     var gameTimer : Timer?
     var progressBarTimer: Timer?
     var gameSeconds = 60
     var fishesArray = [SCNNode]()
     var shark : SCNNode?
-//    var sharkRightImage = UIImage(named: "sharkFirst")
-//    var sharkLeftImage = UIImage(named: "sharkFirst")?.withHorizontallyFlippedOrientation()
     @IBOutlet var sharkScoreText: UILabel!
     @IBOutlet var playerScoreText: UILabel!
-//    var sharkCreated = false
     var fishBeingKilled : SCNNode?
     var sharkTarget : SCNNode? {
         didSet{
@@ -42,24 +41,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             self.playerScoreText.text = "\(self.playerScore)"
         }
     }
+    
+    // MARK: - Buttons
+    
     @IBOutlet weak var menuButton: UIButton!
+    
+    // Esta función nos devuelve al viewcontroller que tiene el menú principal
     @IBAction func menuButtonAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Funciones del ViewController
+    // MARK: - ViewController functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
         sceneView.delegate = self
-        
-        // hacemos que el delegado de physicWorld sea la propia view
         sceneView.scene.physicsWorld.contactDelegate = self
-
-        // Show statistics such as fps and node count
         sceneView.showsStatistics = false
+        
         menuButton.layer.cornerRadius = menuButton.bounds.height / 2
         menuButton.backgroundColor = UIColor(red: (105/255), green: (183/255), blue: (230/255), alpha: 1)
         
@@ -81,18 +81,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
         sceneView.session.run(configuration)
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
         sceneView.session.pause()
     }
     
@@ -115,17 +110,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     // MARK: - SCNPhysicsContactDelegate
     
+    // Con esta función del delegado manejamos las colisiones entre los peces y el tiburón
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-//        var sharkInContact : SCNNode?
         var fishInContact : SCNNode?
         print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
         if (contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue)  ||  (contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue) {
             if contact.nodeA.name! == "shark" || contact.nodeB.name! == "shark" {
                 if contact.nodeA.name! == "shark" {
-//                    sharkInContact = contact.nodeA
                     fishInContact = contact.nodeB
                 } else {
-//                    sharkInContact = contact.nodeB
                     fishInContact = contact.nodeA
                 }
                 let fishName = fishInContact?.name
@@ -155,10 +148,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         }
     }
     
+    // MARK: - Gesture recognizer
+    
+    // Esta función se encarga de manejar los toques en la pantalla
     @objc func handleTap(_ gestureRecognice: UIGestureRecognizer) {
 
         let _ = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), types: ARHitTestResult.ResultType.featurePoint)
-//        guard let _ : ARHitTestResult = results.first else {return}
         let tappedNode = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), options: nil)
         if !tappedNode.isEmpty {
             let node = tappedNode[0].node
@@ -188,6 +183,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         } else {return}
     }
     
+    // MARK: - Creating game creatures
+    
+    // Esta función parametriza al tiburón y le pasa los parámetros a la función
+    // createAnyFish para que cree el tiburón con esos parámetros
     func createShark() -> SCNNode{
         let minDistance = Float(1)
         let maxDistance = Float(3)
@@ -200,6 +199,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return shark
     }
     
+    // Esta función parametriza los peces de manera aleatoria y le pasa los parámetros a la función
+    // createAnyFish para que cree el pez con esos parámetros
     func createFish(){
         var fish : SCNNode?
         let fishesProbability = [1, 1, 1, 2, 2, 3]
@@ -226,6 +227,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         self.moveFishes(fish: fish!)
     }
     
+    
+    // Esta función crea un pez con los parámetros dados y lo devuelve
     func createAnyFish(image: UIImage, fishName: String, minDistance: Float, maxDistance: Float, plane: SCNPlane) -> SCNNode {
         
         plane.firstMaterial?.diffuse.contents = image
@@ -240,8 +243,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return fish
     }
     
+    // MARK: - Managing game creatures
+    
+    // Esta función se encarga de eliminar el pez que le pasan por parámetro de manera animada
     func killFish(fish: SCNNode){
-        // Creamos, agrupamos y ejecutamos una serie de animaciones
         if let fishIndex = self.fishesArray.firstIndex(of: fish) {
             self.fishesArray.remove(at: fishIndex)
         }
@@ -256,12 +261,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         let remove = SCNAction.removeFromParentNode()
         let groupAction = SCNAction.group([scaleOut, fadeOut])
         let sequenceAction = SCNAction.sequence([groupAction, remove])
-        
-        
         fish.runAction(sequenceAction)
         
     }
     
+    // Esta función añade un movimiento similar al baiben del agua, al pez que se le pasa por parametro
     func moveFishes(fish: SCNNode) {
         
         let moveUp = CABasicAnimation(keyPath: #keyPath(SCNNode.transform))
@@ -275,6 +279,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         fish.addAnimation(moveUp, forKey: nil)
     }
     
+    // Esta función devuelve dos vectores referentes al jugador, el de posición y el de dirección
     func getUserVector() -> (SCNVector3, SCNVector3) {
         if let frame = self.sceneView.session.currentFrame {
             let playerCamera = SCNMatrix4(frame.camera.transform)
@@ -285,6 +290,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
     
+    // Esta función devuelve el nodo del pez más cercano al tiburón, su distancia y su dirección
     func selectTarget() -> (node: SCNNode, distance: Float, distanceVector: SCNVector3) {
         var distanceArray = [Float]()
         var vectorArray = [SCNVector3]()
@@ -299,6 +305,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return (targetNode, targetDistance!, targetVector)
     }
     
+    // Esta función devuelve la distancia y la dirección del nodo A al nodo B
     func nodesDistance(nodeA: SCNNode, nodeB: SCNNode) -> (distanceVector: SCNVector3, distance: Float) {
         let distanceVector = SCNVector3(x: -1 * (nodeA.position.x - nodeB.position.x), y: -1 * (nodeA.position.y - nodeB.position.y), z: -1 * (nodeA.position.z
         - nodeB.position.z))
@@ -306,6 +313,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         return (distanceVector, distance)
     }
     
+    // Esta función pone en movimiento al tiburón en busca del pez que se le pasa por parámetros
+    // junto con la distancia y la dirección de dicho pez
     func chaseTarget(node: SCNNode, distance: Float, distanceVector: SCNVector3) {
         let speed : Float = 0.1
         let timeToTarget = Double(distance / speed)
@@ -316,18 +325,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
             let material = materials![0]
             material.diffuse.contents = UIImage(named: "sharkLeft")
             SCNTransaction.commit()
-//            shark?.geometry?.firstMaterial?.diffuse.contents = sharkLeftImage
         } else {
             SCNTransaction.begin()
             let materials = self.shark!.geometry?.materials
             let material = materials![0]
             material.diffuse.contents = UIImage(named: "sharkRight")
             SCNTransaction.commit()
-//            shark?.geometry?.firstMaterial?.diffuse.contents = sharkRightImage
         }
         self.shark?.runAction(chaseFish)
     }
     
+    // Esta función se encarga de seleccionar el pez más cercano al tiburón y perseguirlo
     func createTarget() {
         guard self.shark != nil else {return}
         let (node, distance, distanceVector) = selectTarget()
@@ -335,12 +343,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         self.sharkTarget = node
     }
     
+    // MARK: - Game timers
+    
+    // Esta función dispara los dos timers del juego
     func runGameTimer() {
         self.gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateGameTimer), userInfo: nil, repeats: true)
         self.progressBarTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateProgressBar), userInfo: nil, repeats: true)
         
     }
     
+    // Esta función actualiza los segundos de juego, en caso de llegar a cero termina el juego
+    // si la cantidad de peces disminuye por debajo de 10 crea 5 más y cada dos segundos actualiza
+    // el target del tiburón
     @objc func updateGameTimer() {
         if gameSeconds == 0 {
             gameTimer?.invalidate()
@@ -359,6 +373,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         }
     }
     
+    // MARK: - Finishing the game
+    
+    // Esta función termina el juego, mostrando el cartel de victoria si así ha sido, grabando la puntuación.
+    // En caso de derrota muestra el cartel de derrota
     func gameOver() {
         self.shark?.removeFromParentNode()
         for i in 0 ..< fishesArray.count {
@@ -384,19 +402,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         sceneView.pointOfView?.addChildNode(gameOverFrame)
     }
     
-    // MARK: - barra de progreso de tiempo
+    // MARK: - Time progress bar
     
     @IBOutlet weak var progressBar: UIProgressView!
     
+    // Esta función actualiza la barra del tiempo
     @objc func updateProgressBar(){
         progressBar.progress -= 0.001667
         progressBar.setProgress(progressBar.progress, animated: true)
     }
     
-    // MARK: - sonidos
+    // MARK: - sounds
     
     var player: AVAudioPlayer?
     
+    // Esta función reproduce el archivo de sonido que se le pasa por parámetros junto con su extensión
     func playSound(sound : String, format: String) {
         guard let url = Bundle.main.url(forResource: sound, withExtension: format) else { return }
         do {
@@ -412,6 +432,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         }
     }
     
+    // Esta función crea un nodo en la escena que reproduce la música de fondo
     func playBackgroundMusic(){
         let audioNode = SCNNode()
         let audioSource = SCNAudioSource(fileNamed: "crazySharkMusic.mp3")!
@@ -426,6 +447,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
 }
 
+// MARK: - Collision Categories
+
+// Estructura para clasificar y manejar las colisiones
 struct CollisionCategory: OptionSet {
     let rawValue: Int
     
