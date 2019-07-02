@@ -46,8 +46,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     
     @IBOutlet weak var menuButton: UIButton!
     
-    // Esta función nos devuelve al viewcontroller que tiene el menú principal
+    // Esta función para la música y el timer y nos devuelve al viewcontroller que tiene el menú principal
     @IBAction func menuButtonAction(_ sender: Any) {
+        if let audioNode = sceneView.scene.rootNode.childNode(withName: "backgroundAudioPlayer", recursively: true) {
+            audioNode.removeAllAudioPlayers()
+        }
+        gameTimer?.invalidate()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -113,7 +117,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     // Con esta función del delegado manejamos las colisiones entre los peces y el tiburón
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var fishInContact : SCNNode?
-        print("** Collision!! " + contact.nodeA.name! + " hit " + contact.nodeB.name!)
         if (contact.nodeA.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue)  ||  (contact.nodeB.physicsBody?.categoryBitMask == CollisionCategory.targetCategory.rawValue) {
             if contact.nodeA.name! == "shark" || contact.nodeB.name! == "shark" {
                 if contact.nodeA.name! == "shark" {
@@ -157,7 +160,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
         let tappedNode = self.sceneView.hitTest(gestureRecognice.location(in: gestureRecognice.view), options: nil)
         if !tappedNode.isEmpty {
             let node = tappedNode[0].node
-            print("Has todaco a \(String(describing: node.name))")
             let fishName = node.name
             switch fishName {
             case "shark":
@@ -415,7 +417,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     // MARK: - sounds
     
     var player: AVAudioPlayer?
-    
+    var audioPlayer: SCNAudioPlayer?
     // Esta función reproduce el archivo de sonido que se le pasa por parámetros junto con su extensión
     func playSound(sound : String, format: String) {
         guard let url = Bundle.main.url(forResource: sound, withExtension: format) else { return }
@@ -436,11 +438,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDele
     func playBackgroundMusic(){
         let audioNode = SCNNode()
         let audioSource = SCNAudioSource(fileNamed: "crazySharkMusic.mp3")!
-        let audioPlayer = SCNAudioPlayer(source: audioSource)
+        audioPlayer = SCNAudioPlayer(source: audioSource)
         
-        audioNode.addAudioPlayer(audioPlayer)
+        audioNode.addAudioPlayer(audioPlayer!)
+        audioNode.name = "backgroundAudioPlayer"
         
-        let play = SCNAction.playAudio(audioSource, waitForCompletion: true)
+        let play = SCNAction.playAudio(audioSource, waitForCompletion: false)
         audioNode.runAction(play)
         sceneView.scene.rootNode.addChildNode(audioNode)
     }
