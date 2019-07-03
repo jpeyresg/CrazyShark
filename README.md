@@ -1,3 +1,3 @@
 # CrazyShark
-Kid game based on augmented reallity api from Apple.
+Funny game for kids based on augmented reality api from Apple.
 Feel free to download it.
