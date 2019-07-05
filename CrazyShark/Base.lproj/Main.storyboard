@@ -56,7 +56,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYe-SR-3AT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYe-SR-3AT">
                                 <rect key="frame" x="128.5" y="92" width="118.5" height="24"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -91,18 +91,32 @@
                                     <action selector="playAction:" destination="mE1-yQ-5nW" eventType="touchUpInside" id="iya-BB-Gn8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD5-5z-dkK">
+                                <rect key="frame" x="131.5" y="510" width="112.5" height="34.5"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetScoreAction:" destination="mE1-yQ-5nW" eventType="touchUpInside" id="Q1l-iD-JIZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.074509803921568626" green="0.74901960784313726" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Reb-Mc-IqB" firstAttribute="height" secondItem="h7K-aL-Sbh" secondAttribute="height" multiplier="0.2" id="095-d0-fnQ"/>
                             <constraint firstItem="Reb-Mc-IqB" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="0tf-13-344"/>
                             <constraint firstItem="Reb-Mc-IqB" firstAttribute="top" secondItem="h7K-aL-Sbh" secondAttribute="top" constant="150" id="4sr-Yt-u1A"/>
+                            <constraint firstItem="rD5-5z-dkK" firstAttribute="top" secondItem="KpL-Uq-2Po" secondAttribute="bottom" constant="40" id="EO3-0d-Z9O"/>
                             <constraint firstItem="KpL-Uq-2Po" firstAttribute="width" secondItem="sSL-FX-KGC" secondAttribute="width" id="Egq-jI-ziB"/>
                             <constraint firstItem="KpL-Uq-2Po" firstAttribute="top" secondItem="sSL-FX-KGC" secondAttribute="bottom" constant="40" id="FVu-uL-p35"/>
+                            <constraint firstItem="rD5-5z-dkK" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="NcY-YN-e3z"/>
                             <constraint firstItem="KpL-Uq-2Po" firstAttribute="height" secondItem="sSL-FX-KGC" secondAttribute="height" id="ViQ-th-kwS"/>
+                            <constraint firstItem="rD5-5z-dkK" firstAttribute="width" secondItem="KpL-Uq-2Po" secondAttribute="width" id="Vl1-rt-wgH"/>
                             <constraint firstItem="sSL-FX-KGC" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="Wh8-Hw-Jol"/>
                             <constraint firstItem="sSL-FX-KGC" firstAttribute="width" secondItem="h7K-aL-Sbh" secondAttribute="width" multiplier="0.3" id="jHd-yc-uoM"/>
                             <constraint firstItem="jYe-SR-3AT" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="jV5-qB-ZdG"/>
+                            <constraint firstItem="rD5-5z-dkK" firstAttribute="height" secondItem="KpL-Uq-2Po" secondAttribute="height" id="pQD-5F-qu5"/>
                             <constraint firstItem="KpL-Uq-2Po" firstAttribute="centerX" secondItem="h7K-aL-Sbh" secondAttribute="centerX" id="q3H-D3-wz9"/>
                             <constraint firstItem="Reb-Mc-IqB" firstAttribute="top" secondItem="jYe-SR-3AT" secondAttribute="bottom" constant="34" id="tjx-tH-6b6"/>
                             <constraint firstItem="sSL-FX-KGC" firstAttribute="top" secondItem="Reb-Mc-IqB" secondAttribute="bottom" constant="78.5" id="vld-aa-VZv"/>
@@ -112,6 +126,7 @@
                     <connections>
                         <outlet property="helpButton" destination="sSL-FX-KGC" id="HBq-Ji-EJ8"/>
                         <outlet property="playButton" destination="KpL-Uq-2Po" id="WGL-If-2j8"/>
+                        <outlet property="resetScoreButton" destination="rD5-5z-dkK" id="fZx-lT-ygf"/>
                         <outlet property="scoreLabel" destination="jYe-SR-3AT" id="RQF-5p-JnA"/>
                         <segue destination="BV1-FR-VrT" kind="presentation" identifier="homeToGameSegue" id="7bx-N1-ORm"/>
                         <segue destination="ix5-pF-d0n" kind="presentation" identifier="homeToHelpSegue" id="aBB-yw-Ju9"/>

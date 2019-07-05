@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var resetScoreButton: UIButton!
+    
     
     // MARK: - ViewController functions
     override func viewDidLoad() {
@@ -22,6 +24,8 @@ class HomeViewController: UIViewController {
         helpButton.backgroundColor = .red
         playButton.layer.cornerRadius = playButton.bounds.height / 2
         playButton.backgroundColor = .red
+        resetScoreButton.layer.cornerRadius = resetScoreButton.bounds.height / 2
+        resetScoreButton.backgroundColor = .red
         
     }
     
@@ -29,7 +33,7 @@ class HomeViewController: UIViewController {
         let defaults = UserDefaults.standard
         if let gameScore = defaults.value(forKey: "score"){
             let score = gameScore as! Int
-            scoreLabel.text = "Last Score: \(score)"
+            scoreLabel.text = "Best Score: \(score)"
         }
     }
     
@@ -43,5 +47,10 @@ class HomeViewController: UIViewController {
     // El botón play nos lleva al viewcontroller que contiene el juego
     @IBAction func playAction(_ sender: Any) {
         performSegue(withIdentifier: "homeToGameSegue", sender: self)
+    }
+    @IBAction func resetScoreAction(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set(nil, forKey: "score")
+        scoreLabel.text = "Best Score: 0"
     }
 }
